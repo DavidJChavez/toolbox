@@ -1,42 +1,144 @@
-# sv
+# Toolbox
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Colección de utilidades para desarrolladores, pensada para resolver pequeños problemas que aparecen durante el **análisis y debugging** de software: decodificar un Base64, validar un JSON, inspeccionar payloads, comparar respuestas, etc.
 
-## Creating a project
+En lugar de depender de sitios externos o scripts sueltos, Toolbox concentra esas tareas en un solo lugar. Todo corre **100% en el navegador**: tus datos no salen de tu máquina.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Motivación
 
-```sh
-# create a new project
-npx sv create my-app
-```
+Cuando debuggeamos APIs, revisamos logs o analizamos respuestas de servicios, repetimos las mismas micro-tareas: convertir Base64 a imagen, formatear JSON ilegible, validar si un payload es válido, comparar dos respuestas, etc. Son fricciones pequeñas, pero interrumpen el flujo.
 
-To recreate this project with the same configuration:
+Toolbox existe para eliminar esa fricción: herramientas rápidas, locales y encadenables (en el futuro) dentro de una interfaz consistente.
 
-```sh
-# recreate this project
-bun x sv@0.15.3 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" tailwindcss="plugins:none" mcp="ide:cursor+setup:remote" --install bun toolbox
-```
+## Stack
 
-## Developing
+- [SvelteKit](https://kit.svelte.dev/) + Svelte 5 (runes)
+- [shadcn-svelte](https://shadcn-svelte.com/) (preset `b6rt8ttCM`, tema `mist`)
+- Tailwind CSS 4
+- [Bun](https://bun.sh/) como package manager
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Desarrollo
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun install
+bun run dev
 ```
 
-## Building
-
-To create a production version of your app:
+Otros comandos útiles:
 
 ```sh
-npm run build
+bun run build      # build de producción
+bun run preview    # preview del build
+bun run check      # type-check con svelte-check
+bun run test       # tests con vitest
+bun run lint       # prettier + eslint
 ```
 
-You can preview the production build with `npm run preview`.
+## Estado actual
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### Infraestructura
+
+- [x] Layout con sidebar, navbar y command palette (`⌘K`)
+- [x] Dashboard generado desde el tool registry
+- [x] Dark mode (`mode-watcher`)
+- [x] Componente `ToolShell` reutilizable por herramienta
+- [x] Tool registry como fuente única de verdad (`src/lib/tools/registry.ts`)
+
+### Herramientas disponibles
+
+| Tool | Ruta | Estado |
+|------|------|--------|
+| Base64 encode/decode (texto, archivos, preview de imagen/PDF) | `/tools/base64` | ✅ |
+| JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json` | ✅ |
+| Dataflow (editor de nodos) | `/dataflow` | 🔜 placeholder |
+
+## Roadmap
+
+Roadmap pensado para crecer por fases. Marca `[x]` conforme avances en futuras sesiones.
+
+### Fase 0 — Fundación ✅
+
+- [x] Tool registry + tipos (`ToolDefinition`, categorías, `NodeSpec`)
+- [x] Layout (sidebar + navbar + command palette + theme toggle)
+- [x] Dashboard con cards desde el registry
+- [x] `ToolShell` (header, descripción, clear, copy/download, toasts)
+
+### Fase 1 — Base64 ✅
+
+- [x] Encode: texto y archivos (drag & drop)
+- [x] Decode: data URLs, sniff de MIME, preview imagen/PDF/texto/binario
+- [x] Lógica pura en `src/lib/tools/base64/tool.ts`
+
+### Fase 2 — JSON toolkit ✅
+
+- [x] Prettify, minify, validate, sort keys
+- [x] Escape / unescape, JSON → TypeScript
+- [x] JSON ↔ YAML, JSONPath, diff lado a lado
+- [x] Lógica pura en `src/lib/tools/json/tool.ts`
+
+### Fase 3 — Catálogo incremental (una tool por PR)
+
+Prioridad sugerida según utilidad diaria en debugging:
+
+- [ ] URL encode/decode + query-string parser
+- [ ] JWT decoder (header/payload/signature, validación de `exp`)
+- [ ] UUID / NanoID / ULID generator
+- [ ] Hash (MD5, SHA-1/256/512) y HMAC
+- [ ] Regex tester con highlight de matches y replace
+- [ ] Cron expression parser (próximas ejecuciones)
+- [ ] Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)
+- [ ] Color converter (HEX ↔ RGB ↔ HSL ↔ OKLCH)
+- [ ] Text diff (Myers diff)
+- [ ] Markdown preview
+- [ ] QR code generator / reader
+- [ ] Image → WebP/AVIF (client-side con `<canvas>`)
+- [ ] CSV ↔ JSON
+
+**Cómo agregar una tool nueva:**
+
+1. Crear `src/lib/tools/<id>/tool.ts` (funciones puras `run()`)
+2. Crear `src/lib/tools/<id>/<Id>Tool.svelte` (UI con `ToolShell`)
+3. Registrar en `src/lib/tools/registry.ts`
+4. Crear ruta en `src/routes/(app)/tools/<id>/+page.svelte`
+
+El sidebar, command palette y dashboard se actualizan solos.
+
+### Fase 4 — Dataflow editor (endgame)
+
+- [ ] Instalar `@xyflow/svelte` (Svelte Flow)
+- [ ] Canvas en `/dataflow` con catálogo de nodos desde el registry
+- [ ] Conexiones tipadas (`text`, `json`, `binary`, `image`)
+- [ ] Ejecutor: topological sort → `tool.run()` por nodo → propagar resultado
+- [ ] Persistencia del flow en `localStorage`
+
+### Fase 5 — Persistencia y compartir
+
+- [ ] Historial por tool (últimos N inputs/outputs) en `localStorage`
+- [ ] Flows guardados con nombre
+- [ ] Export/import de flows como `.json`
+- [ ] URL share opcional (input comprimido en hash `#data=...`)
+
+### Fase 6 — Pulido
+
+- [ ] PWA (offline real)
+- [ ] Tests con vitest para cada `tool.run()`
+- [ ] Atajos de teclado por tool
+
+## Arquitectura (resumen)
+
+```
+src/lib/tools/registry.ts     → sidebar, command palette, dashboard, (futuro) nodos
+src/lib/tools/<id>/tool.ts      → lógica pura, reutilizable en dataflow
+src/lib/tools/<id>/*Tool.svelte → UI de la herramienta
+src/routes/(app)/               → layout + rutas
+```
+
+Principio clave: cada herramienta expone una función `run(input) → output` además de su UI, para poder encadenarlas en el editor de nodos.
+
+## Dependencias previstas por fase
+
+| Fase | Paquetes |
+|------|----------|
+| 2 (JSON) | `yaml`, `jsonpath-plus` ✅ instalados |
+| 3 | `js-sha256` / Web Crypto, `nanoid`, `ulid`, `qrcode`, etc. |
+| 4 | `@xyflow/svelte` |
