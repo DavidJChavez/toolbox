@@ -1,6 +1,11 @@
 import BinaryIcon from '@lucide/svelte/icons/binary';
 import BracesIcon from '@lucide/svelte/icons/braces';
+import ClockIcon from '@lucide/svelte/icons/clock';
+import FingerprintIcon from '@lucide/svelte/icons/fingerprint';
+import KeyRoundIcon from '@lucide/svelte/icons/key-round';
 import Link2Icon from '@lucide/svelte/icons/link-2';
+import RegexIcon from '@lucide/svelte/icons/regex';
+import ShuffleIcon from '@lucide/svelte/icons/shuffle';
 import type { ToolCategory, ToolDefinition } from './types';
 
 export const tools: ToolDefinition[] = [
@@ -41,6 +46,74 @@ export const tools: ToolDefinition[] = [
 		node: {
 			inputs: [{ id: 'input', label: 'URL', type: 'text' }],
 			outputs: [{ id: 'output', label: 'Result', type: 'text' }]
+		}
+	},
+	{
+		id: 'jwt',
+		name: 'JWT',
+		description: 'Decode JWT tokens and inspect header, payload, signature and expiration.',
+		category: 'crypto',
+		icon: KeyRoundIcon,
+		href: '/tools/jwt',
+		keywords: ['jwt', 'token', 'decode', 'exp', 'claims', 'payload'],
+		node: {
+			inputs: [{ id: 'input', label: 'JWT', type: 'text' }],
+			outputs: [{ id: 'output', label: 'Payload', type: 'json' }]
+		}
+	},
+	{
+		id: 'hash',
+		name: 'Hash',
+		description: 'Compute MD5, SHA-1, SHA-256, SHA-512 hashes and HMAC digests.',
+		category: 'crypto',
+		icon: FingerprintIcon,
+		href: '/tools/hash',
+		keywords: ['hash', 'md5', 'sha256', 'sha512', 'hmac', 'checksum'],
+		node: {
+			inputs: [{ id: 'input', label: 'Input', type: 'text' }],
+			outputs: [{ id: 'output', label: 'Digest', type: 'text' }]
+		}
+	},
+	{
+		id: 'timestamp',
+		name: 'Timestamp',
+		description: 'Convert Unix timestamps to human-readable dates and back.',
+		category: 'time',
+		icon: ClockIcon,
+		href: '/tools/timestamp',
+		keywords: ['timestamp', 'unix', 'epoch', 'date', 'timezone', 'iso8601'],
+		node: {
+			inputs: [{ id: 'input', label: 'Timestamp', type: 'text' }],
+			outputs: [{ id: 'output', label: 'Date', type: 'text' }]
+		}
+	},
+	{
+		id: 'uuid',
+		name: 'UUID',
+		description: 'Generate UUID v4, NanoID and ULID identifiers in batches.',
+		category: 'crypto',
+		icon: ShuffleIcon,
+		href: '/tools/uuid',
+		keywords: ['uuid', 'nanoid', 'ulid', 'generate', 'id', 'unique'],
+		node: {
+			inputs: [],
+			outputs: [{ id: 'output', label: 'ID', type: 'text' }]
+		}
+	},
+	{
+		id: 'regex',
+		name: 'Regex',
+		description: 'Test regular expressions with match highlighting and replace preview.',
+		category: 'text',
+		icon: RegexIcon,
+		href: '/tools/regex',
+		keywords: ['regex', 'regexp', 'pattern', 'match', 'replace', 'test'],
+		node: {
+			inputs: [
+				{ id: 'pattern', label: 'Pattern', type: 'text' },
+				{ id: 'input', label: 'Input', type: 'text' }
+			],
+			outputs: [{ id: 'output', label: 'Matches', type: 'text' }]
 		}
 	}
 ];

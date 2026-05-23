@@ -50,8 +50,13 @@ bun run lint       # prettier + eslint
 | ------------------------------------------------------------------------------ | --------------- | -------------- |
 | Base64 encode/decode (texto, archivos, preview de imagen/PDF)                  | `/tools/base64` | ✅             |
 | JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json`   | ✅             |
-| URL encode/decode + query-string parser                                        | `/tools/url`    | ✅             |
-| Dataflow (editor de nodos)                                                     | `/dataflow`     | 🔜 placeholder |
+| URL encode/decode + query-string parser                                        | `/tools/url`        | ✅             |
+| JWT decoder (header/payload/signature, validación de `exp`)                    | `/tools/jwt`        | ✅             |
+| UUID / NanoID / ULID generator                                                 | `/tools/uuid`       | ✅             |
+| Hash (MD5, SHA-1/256/512) y HMAC                                               | `/tools/hash`       | ✅             |
+| Regex tester con highlight de matches y replace                                | `/tools/regex`      | ✅             |
+| Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)                           | `/tools/timestamp`  | ✅             |
+| Dataflow (editor de nodos)                                                     | `/dataflow`         | 🔜 placeholder |
 
 ## Roadmap
 
@@ -82,12 +87,12 @@ Roadmap pensado para crecer por fases. Marca `[x]` conforme avances en futuras s
 Prioridad sugerida según utilidad diaria en debugging:
 
 - [x] URL encode/decode + query-string parser
-- [ ] JWT decoder (header/payload/signature, validación de `exp`)
-- [ ] UUID / NanoID / ULID generator
-- [ ] Hash (MD5, SHA-1/256/512) y HMAC
-- [ ] Regex tester con highlight de matches y replace
+- [x] JWT decoder (header/payload/signature, validación de `exp`)
+- [x] UUID / NanoID / ULID generator
+- [x] Hash (MD5, SHA-1/256/512) y HMAC
+- [x] Regex tester con highlight de matches y replace
 - [ ] Cron expression parser (próximas ejecuciones)
-- [ ] Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)
+- [x] Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)
 - [ ] Color converter (HEX ↔ RGB ↔ HSL ↔ OKLCH)
 - [ ] Text diff (Myers diff)
 - [ ] Markdown preview
