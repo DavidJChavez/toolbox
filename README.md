@@ -46,11 +46,12 @@ bun run lint       # prettier + eslint
 
 ### Herramientas disponibles
 
-| Tool | Ruta | Estado |
-|------|------|--------|
-| Base64 encode/decode (texto, archivos, preview de imagen/PDF) | `/tools/base64` | ✅ |
-| JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json` | ✅ |
-| Dataflow (editor de nodos) | `/dataflow` | 🔜 placeholder |
+| Tool                                                                           | Ruta            | Estado         |
+| ------------------------------------------------------------------------------ | --------------- | -------------- |
+| Base64 encode/decode (texto, archivos, preview de imagen/PDF)                  | `/tools/base64` | ✅             |
+| JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json`   | ✅             |
+| URL encode/decode + query-string parser                                        | `/tools/url`    | ✅             |
+| Dataflow (editor de nodos)                                                     | `/dataflow`     | 🔜 placeholder |
 
 ## Roadmap
 
@@ -80,7 +81,7 @@ Roadmap pensado para crecer por fases. Marca `[x]` conforme avances en futuras s
 
 Prioridad sugerida según utilidad diaria en debugging:
 
-- [ ] URL encode/decode + query-string parser
+- [x] URL encode/decode + query-string parser
 - [ ] JWT decoder (header/payload/signature, validación de `exp`)
 - [ ] UUID / NanoID / ULID generator
 - [ ] Hash (MD5, SHA-1/256/512) y HMAC
@@ -137,8 +138,8 @@ Principio clave: cada herramienta expone una función `run(input) → output` ad
 
 ## Dependencias previstas por fase
 
-| Fase | Paquetes |
-|------|----------|
-| 2 (JSON) | `yaml`, `jsonpath-plus` ✅ instalados |
-| 3 | `js-sha256` / Web Crypto, `nanoid`, `ulid`, `qrcode`, etc. |
-| 4 | `@xyflow/svelte` |
+| Fase     | Paquetes                                                   |
+| -------- | ---------------------------------------------------------- |
+| 2 (JSON) | `yaml`, `jsonpath-plus` ✅ instalados                      |
+| 3        | `js-sha256` / Web Crypto, `nanoid`, `ulid`, `qrcode`, etc. |
+| 4        | `@xyflow/svelte`                                           |

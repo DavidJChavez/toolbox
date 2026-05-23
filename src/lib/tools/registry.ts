@@ -1,5 +1,6 @@
 import BinaryIcon from '@lucide/svelte/icons/binary';
 import BracesIcon from '@lucide/svelte/icons/braces';
+import Link2Icon from '@lucide/svelte/icons/link-2';
 import type { ToolCategory, ToolDefinition } from './types';
 
 export const tools: ToolDefinition[] = [
@@ -27,6 +28,19 @@ export const tools: ToolDefinition[] = [
 		node: {
 			inputs: [{ id: 'input', label: 'JSON', type: 'json' }],
 			outputs: [{ id: 'output', label: 'Result', type: 'json' }]
+		}
+	},
+	{
+		id: 'url',
+		name: 'URL',
+		description: 'Encode, decode and inspect URLs and query strings.',
+		category: 'encoding',
+		icon: Link2Icon,
+		href: '/tools/url',
+		keywords: ['url', 'encode', 'decode', 'query', 'params', 'uri'],
+		node: {
+			inputs: [{ id: 'input', label: 'URL', type: 'text' }],
+			outputs: [{ id: 'output', label: 'Result', type: 'text' }]
 		}
 	}
 ];
