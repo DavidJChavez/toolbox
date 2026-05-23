@@ -77,6 +77,14 @@ bun run test       # vitest --run
 
 Antes de cerrar cualquier cambio: `bun run check && bun run lint`.
 
+## Despliegue (Vercel)
+
+- Adapter: `@sveltejs/adapter-vercel`.
+- Toda la app es **prerenderizada** (`src/routes/+layout.ts` exporta `prerender = true`). El build sube HTML estático al CDN de Vercel; no se generan serverless functions.
+- Si agregas una ruta o tool con datos dinámicos en server (`+page.server.ts`, `+server.ts`, `load` server-only), debes desactivar el prerender en esa ruta o moverla fuera del prerender global. Mantén la regla del proyecto: **todo en el cliente**.
+- No hace falta `vercel.json` ni variables de entorno.
+- Verificación local: tras `bun run build`, en `.vercel/output/static/` deben aparecer los HTML de cada ruta (`index.html`, `tools/base64.html`, etc.). Existe un `catchall.func` que actúa solo como fallback 404 — es normal aunque todo esté prerenderizado; lo que NO debe aparecer son funciones por ruta.
+
 ## Project Configuration
 
 - **Language**: TypeScript
