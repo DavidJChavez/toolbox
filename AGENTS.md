@@ -57,9 +57,9 @@ El sidebar, command palette y dashboard se actualizan solos.
 
 ## Estado actual
 
-Tools en producción: **Base64**, **JSON**, **URL**, **JWT**, **Hash + HMAC**, **Timestamp**, **UUID/NanoID/ULID**, **Regex**. Ver tabla detallada en [`README.md`](README.md).
+Tools en producción: **Base64**, **JSON**, **URL**, **JWT**, **Hash + HMAC**, **Timestamp**, **UUID/NanoID/ULID**, **Regex**, **Text Diff**, **Markdown**, **CSV**, **Cron**, **Color**, **Image**, **QR Code**. Ver tabla detallada en [`README.md`](README.md).
 
-Fase activa: **Fase 3 — Catálogo incremental**. Próximas tools sugeridas (no implementadas aún): Cron parser, Color converter, Text diff, Markdown preview, QR code, Image → WebP, CSV ↔ JSON.
+Fase activa: **Fase 4 — Dataflow editor**. Próximo paso: instalar `@xyflow/svelte` y conectar el catálogo de nodos desde el registry.
 
 Fases pendientes: **4** Dataflow editor (`@xyflow/svelte`), **5** Persistencia/share, **6** PWA + tests.
 

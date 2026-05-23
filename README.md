@@ -46,17 +46,24 @@ bun run lint       # prettier + eslint
 
 ### Herramientas disponibles
 
-| Tool                                                                           | Ruta            | Estado         |
-| ------------------------------------------------------------------------------ | --------------- | -------------- |
-| Base64 encode/decode (texto, archivos, preview de imagen/PDF)                  | `/tools/base64` | ✅             |
-| JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json`   | ✅             |
-| URL encode/decode + query-string parser                                        | `/tools/url`        | ✅             |
-| JWT decoder (header/payload/signature, validación de `exp`)                    | `/tools/jwt`        | ✅             |
-| UUID / NanoID / ULID generator                                                 | `/tools/uuid`       | ✅             |
-| Hash (MD5, SHA-1/256/512) y HMAC                                               | `/tools/hash`       | ✅             |
-| Regex tester con highlight de matches y replace                                | `/tools/regex`      | ✅             |
-| Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)                           | `/tools/timestamp`  | ✅             |
-| Dataflow (editor de nodos)                                                     | `/dataflow`         | 🔜 placeholder |
+| Tool                                                                           | Ruta               | Estado         |
+| ------------------------------------------------------------------------------ | ------------------ | -------------- |
+| Base64 encode/decode (texto, archivos, preview de imagen/PDF)                  | `/tools/base64`    | ✅             |
+| JSON (prettify, minify, validate, sort, escape, JSON→TS, YAML, JSONPath, diff) | `/tools/json`      | ✅             |
+| URL encode/decode + query-string parser                                        | `/tools/url`       | ✅             |
+| JWT decoder (header/payload/signature, validación de `exp`)                    | `/tools/jwt`       | ✅             |
+| UUID / NanoID / ULID generator                                                 | `/tools/uuid`      | ✅             |
+| Hash (MD5, SHA-1/256/512) y HMAC                                               | `/tools/hash`      | ✅             |
+| Regex tester con highlight de matches y replace                                | `/tools/regex`     | ✅             |
+| Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)                           | `/tools/timestamp` | ✅             |
+| Text diff (Myers diff, inline + unified)                                       | `/tools/diff`      | ✅             |
+| Markdown preview (GFM → HTML sanitizado)                                       | `/tools/markdown`  | ✅             |
+| CSV ↔ JSON (delimitadores custom, dynamic typing)                              | `/tools/csv`       | ✅             |
+| Cron expression parser (próximas ejecuciones)                                  | `/tools/cron`      | ✅             |
+| Color converter (HEX ↔ RGB ↔ HSL ↔ OKLCH ↔ OKLab)                              | `/tools/color`     | ✅             |
+| Image → WebP/AVIF/JPEG/PNG (client-side con canvas)                            | `/tools/image`     | ✅             |
+| QR code generator (text, URL, WiFi, vCard, geo, calendar)                      | `/tools/qr`        | ✅             |
+| Dataflow (editor de nodos)                                                     | `/dataflow`        | 🔜 placeholder |
 
 ## Roadmap
 
@@ -82,7 +89,7 @@ Roadmap pensado para crecer por fases. Marca `[x]` conforme avances en futuras s
 - [x] JSON ↔ YAML, JSONPath, diff lado a lado
 - [x] Lógica pura en `src/lib/tools/json/tool.ts`
 
-### Fase 3 — Catálogo incremental (una tool por PR)
+### Fase 3 — Catálogo incremental ✅
 
 Prioridad sugerida según utilidad diaria en debugging:
 
@@ -91,14 +98,14 @@ Prioridad sugerida según utilidad diaria en debugging:
 - [x] UUID / NanoID / ULID generator
 - [x] Hash (MD5, SHA-1/256/512) y HMAC
 - [x] Regex tester con highlight de matches y replace
-- [ ] Cron expression parser (próximas ejecuciones)
+- [x] Cron expression parser (próximas ejecuciones)
 - [x] Timestamp ↔ fecha humana (Unix, ISO, zonas horarias)
-- [ ] Color converter (HEX ↔ RGB ↔ HSL ↔ OKLCH)
-- [ ] Text diff (Myers diff)
-- [ ] Markdown preview
-- [ ] QR code generator / reader
-- [ ] Image → WebP/AVIF (client-side con `<canvas>`)
-- [ ] CSV ↔ JSON
+- [x] Color converter (HEX ↔ RGB ↔ HSL ↔ OKLCH)
+- [x] Text diff (Myers diff)
+- [x] Markdown preview
+- [x] QR code generator / reader
+- [x] Image → WebP/AVIF (client-side con `<canvas>`)
+- [x] CSV ↔ JSON
 
 **Cómo agregar una tool nueva:**
 
@@ -143,8 +150,8 @@ Principio clave: cada herramienta expone una función `run(input) → output` ad
 
 ## Dependencias previstas por fase
 
-| Fase     | Paquetes                                                   |
-| -------- | ---------------------------------------------------------- |
-| 2 (JSON) | `yaml`, `jsonpath-plus` ✅ instalados                      |
-| 3        | `js-sha256` / Web Crypto, `nanoid`, `ulid`, `qrcode`, etc. |
-| 4        | `@xyflow/svelte`                                           |
+| Fase     | Paquetes                                                                                                 |
+| -------- | -------------------------------------------------------------------------------------------------------- |
+| 2 (JSON) | `yaml`, `jsonpath-plus` ✅ instalados                                                                    |
+| 3        | `cron-parser`, `cronstrue`, `culori`, `diff`, `marked`, `dompurify`, `qrcode`, `papaparse` ✅ instalados |
+| 4        | `@xyflow/svelte`                                                                                         |
